@@ -75,7 +75,7 @@ test('open multiple tabs with context.newPage()', async ({ context }) => {
 
   // Switch back to the first tab
   await tab1.bringToFront();
-  await expect(tab1.getByRole('heading', { name: 'Example Domain' })).toBeVisible();
+  await expect(tab1.getByText("This domain is for use")).toBeVisible();
 
   await tab2.close();
   expect(context.pages()).toHaveLength(1);
