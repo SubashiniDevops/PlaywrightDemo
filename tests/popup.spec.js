@@ -78,7 +78,7 @@ test('STEP 3: prompt, type a value into the dialog', async ({ page }) => {
 // STEP 4 | Slide code box "Popup page": browser popup / new window
 // Not a dialog: it is a NEW PAGE, so we wait for the 'popup' event.
 // ---------------------------------------------------------------------------
-test('STEP 4: popup window with waitForEvent("popup")', async ({ page }) => {
+test.only('STEP 4: popup window with waitForEvent("popup")', async ({ page }) => {
   await page.goto(`${BASE}/windows`);
 
   // 4a. Create the promise BEFORE the click. No await here, we are only

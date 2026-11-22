@@ -44,12 +44,15 @@ test('dropdown: role locator', async ({ page }) => {
 });
 
 // Keyboard fallback: focus the control and use the keys, like a user.
-test('dropdown: keyboard fallback', async ({ page }) => {
+test.only('dropdown: keyboard fallback', async ({ page }) => {
   await page.goto(`${BASE}/dropdown`);
 
-  await page.getByRole('combobox').focus();
-  await page.keyboard.press('ArrowDown');
-  await page.keyboard.press('ArrowDown');
+  const dropdown = page.getByRole('combobox');
+  await dropdown.focus();
+  await page.keyboard.type('Option 2'); // type-ahead selects the matching option
+  await page.keyboard.press('Enter');   // harmless commit, in case the list is open
 
-  await expect(page.getByRole('combobox')).toHaveValue('2');
+  await expect(dropdown).toHaveValue('2');
+
+
 });

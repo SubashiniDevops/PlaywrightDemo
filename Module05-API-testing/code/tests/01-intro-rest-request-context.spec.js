@@ -26,14 +26,14 @@ test.describe('custom context options', () => {
     extraHTTPHeaders: { 'X-Course': 'playwright-module-5' },
   });
 
-  test('extraHTTPHeaders are sent on every request', async ({ request }) => {
+  test.only('extraHTTPHeaders are sent on every request', async ({ request }) => {
     const body = await (await request.get('/headers')).json();
     expect(body.headers['X-Course']).toBe('playwright-module-5');
   });
 });
 
 // --- 3. Create your own context with request.newContext() ----------------------------
-test('standalone request context (good for beforeAll / global setup)', async () => {
+test.only('standalone request context (good for beforeAll / global setup)', async () => {
   const api = await request.newContext({
     baseURL: 'https://jsonplaceholder.typicode.com',
     timeout: 10_000,
@@ -47,11 +47,12 @@ test('standalone request context (good for beforeAll / global setup)', async () 
 });
 
 // --- 4. REST principles in practice: resources + verbs + status codes ---------------
-test('REST: a resource URL, a verb, and a meaningful status code', async ({ request }) => {
+test.only('REST: a resource URL, a verb, and a meaningful status code', async ({ request }) => {
   // GET /posts        -> collection, 200
   const list = await request.get('/posts');
   expect(list.status()).toBe(200);
   expect(Array.isArray(await list.json())).toBe(true);
+  console.log("Response JSON : ", await list.json());
 
   // GET /posts/{id}   -> single resource, 200 (or 404 when it does not exist)
   expect((await request.get('/posts/1')).status()).toBe(200);
@@ -59,7 +60,8 @@ test('REST: a resource URL, a verb, and a meaningful status code', async ({ requ
 });
 
 // --- 5. Browser + API in one test: share cookies/storage via page.request ------------
-test('page.request shares the browser context (UI + API together)', async ({ page }) => {
+test.only('page.request shares the browser context (UI + API together)', async ({ page }) => {
   const response = await page.request.get('https://jsonplaceholder.typicode.com/todos/1');
   expect(response.ok()).toBeTruthy();
+  console.log("Response JSON : ", await response.json());
 });

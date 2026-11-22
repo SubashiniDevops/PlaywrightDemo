@@ -25,7 +25,7 @@ test.beforeEach(async ({ context }) => {
 });
 
 // 1. New tab: wait on the CONTEXT for the 'page' event, before the click
-test('new tab - context.waitForEvent("page")', async ({ page }) => {
+test.only('new tab - context.waitForEvent("page")', async ({ page }) => {
   await page.goto(`${BASE}/home`);
 
   // Start waiting BEFORE the action that opens the tab

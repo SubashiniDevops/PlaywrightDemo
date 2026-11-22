@@ -8,20 +8,28 @@ test('date picker: fill by label', async ({ page }) => {
   await page.setContent(`
     <label for="start">Start date</label>
     <input id="start" type="date">`);
+    await page.waitForTimeout(2000);
 
   await page.getByLabel('Start date').fill('2026-09-10');
+  await page.waitForTimeout(2000);
   await expect(page.getByLabel('Start date')).toHaveValue('2026-09-10');
+  await page.waitForTimeout(2000);
 });
 
 // Open shadow DOM: normal Playwright locators pierce it.
 test('shadow DOM: host is transparent to CSS locators', async ({ page }) => {
   await page.goto(`${BASE}/shadowdom`);
+  await page.waitForTimeout(2000);
 
   const host = page.locator('my-paragraph').first();
+  await page.waitForTimeout(2000);
   // The <p> lives inside the shadow root, and the locator still finds it.
   await expect(host.locator('p')).toBeVisible();
+  await page.waitForTimeout(2000);
   await expect(host.locator('p')).toHaveCSS('background-color', 'rgb(102, 102, 102)');
+  await page.waitForTimeout(2000);
   await expect(host.getByText("Let's have some different text!")).toBeVisible();
+  await page.waitForTimeout(2000);
 });
 
 // Virtual list: scroll like a user until the target content appears.

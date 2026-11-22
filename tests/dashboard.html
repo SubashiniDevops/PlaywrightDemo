@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head><title>Dashboard - Demo</title></head>
+<body>
+  <h1>Dashboard</h1>
+  <button id="save">Save</button>
+  <div id="alert-area"></div>
+
+  <ul id="items"></ul>
+
+  <p>Total: <span data-testid="total">$42.00</span></p>
+  <p>Tax: <span data-testid="tax">$2.00</span></p>
+
+  <script>
+    // Alert appears 1 second after clicking Save
+    document.getElementById('save').onclick = () => setTimeout(() => {
+      const a = document.createElement('div');
+      a.setAttribute('role', 'alert');
+      a.textContent = 'Saved successfully';
+      document.getElementById('alert-area').appendChild(a);
+    }, 1000);
+
+    // List items are added one by one, 500 ms apart
+    let n = 0;
+    const t = setInterval(() => {
+      const li = document.createElement('li');
+      li.textContent = 'Item ' + (++n);
+      document.getElementById('items').appendChild(li);
+      if (n === 3) clearInterval(t);
+    }, 500);
+  </script>
+</body>
+</html>

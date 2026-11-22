@@ -23,9 +23,9 @@ test('the-internet - new window via link', async ({ page }) => {
 test('demoqa - new tab button', async ({ page }) => {
   await page.goto('https://demoqa.com/browser-windows');
 
-  const pagePromise = page.context().waitForEvent('page');
+  const pagePromise = page.context().waitForEvent('page');//parent window
   await page.locator('#tabButton').click();
-  const newTab = await pagePromise;
+  const newTab = await pagePromise;//child window
   await newTab.waitForLoadState();
 
   await expect(newTab).toHaveURL(/sample/);
@@ -37,9 +37,9 @@ test('demoqa - new tab button', async ({ page }) => {
 test('demoqa - new window button', async ({ page }) => {
   await page.goto('https://demoqa.com/browser-windows');
 
-  const popupPromise = page.waitForEvent('popup');
+  const popupPromise = page.waitForEvent('popup');//parent window
   await page.locator('#windowButton').click();
-  const popup = await popupPromise;
+  const popup = await popupPromise;//child window
   await popup.waitForLoadState();
 
   await expect(popup.locator('#sampleHeading')).toHaveText('This is a sample page');
@@ -69,7 +69,7 @@ test('open multiple tabs with context.newPage()', async ({ context }) => {
   const tab2 = await context.newPage();
   await tab2.goto('https://playwright.dev');
 
-  expect(context.pages()).toHaveLength(2);
+  expect(context.pages()).toHaveLength(2);//how to find out ho many pages present
   await expect(tab1).toHaveTitle('Example Domain');
   await expect(tab2).toHaveTitle(/Playwright/);
 
