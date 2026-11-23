@@ -1,0 +1,13 @@
+{
+  "name": "module5-api-testing-playwright",
+  "version": "1.0.0",
+  "description": "Module 05: API testing using Playwright (runnable examples)",
+  "scripts": {
+    "test": "playwright test",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "ajv": "^8.17.1"
+  }
+}
